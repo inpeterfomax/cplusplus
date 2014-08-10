@@ -31,6 +31,7 @@ int main()
 	}while(pro1>= pro2);
 	
 	cout<<"the year is i "<<i<<" and the profit is "<<pro1<<" and "<<pro2<<endl;
+	cout<<"the year is i "<<i<<" and the profit is "<<pro1<<" and "<<pro2<<endl;
 	
 	return 0;
 }
