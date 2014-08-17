@@ -32,6 +32,6 @@ int main()
 	
 	cout<<"the year is i "<<i<<" and the profit is "<<pro1<<" and "<<pro2<<endl;
 	cout<<"the year is i "<<i<<" and the profit is "<<pro1<<" and "<<pro2<<endl;
-	
+	//this is for test . 
 	return 0;
 }
