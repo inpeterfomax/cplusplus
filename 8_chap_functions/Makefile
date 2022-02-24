@@ -1,11 +1,16 @@
+OBJ1 := template.o
+OBJ2 := twotemps.o
 
+TARGET := twotemps template
 
-OBJ :=template.o
+all: $(TARGET)
 
-TARGET := template
-
-template:$(OBJ)
+template:$(OBJ1)
 	g++ -o $@ $<
+
+twotemps:$(OBJ2)
+	g++ -o $@ $<
+
 
 clean:
 	rm *.o -rf 
