@@ -108,3 +108,4 @@ Time Time :: operator * (double num)
 
    return a;
 }
+
