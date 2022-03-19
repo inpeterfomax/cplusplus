@@ -87,25 +87,46 @@ Time Time :: operator - (const Time & t) const
         if (minutes >= t.minutes) {
             sub.minutes = minutes - t.minutes;
         } else {
-            cout << "wrong sub-number : " << t.Show() << endl;
+            cout << "wrong sub-number : " << t.minutes << endl;
         }
     } else {
-        cout << "wrong sub-number : " << t.Show() << endl;
+        cout << "wrong sub-number : " << t.minutes << endl;
     }
 
-    return sum;
+    return sub;
 }
 
-Time Time :: operator * (double num)
+Time Time :: operator * (double mult) const
 {
-   Time a;
-   int extra;
-    
-   extra = (minutes * num) / 60;
+   Time a; 
+   long totalminutes = hours*mult*60 + minutes*mult; 
 
-   a.minutes = (minutes * num) % 60;
-   a.hours = hours * num + extra;
+   a.hours = totalminutes / 60;
+   a.minutes = totalminutes % 60;
 
    return a;
 }
+//Friend Function
+Time operator *(double mult, const Time & t) 
+{
+   Time a; 
+   long totalminutes = t.hours*mult*60 + t.minutes*mult; 
 
+   a.hours = totalminutes / 60;
+   a.minutes = totalminutes % 60;
+
+   return a;
+}
+/*
+void operator << (ostream & os, const Time & t)
+{
+    os << "hours = " << t.hours << " minutes = " << t.minutes ;
+}
+*/
+/*
+std::ostream  operator << (std::ostream & os, const Time & t)
+{
+    os << t.hours << " hours ," << t.minutes << " minutes";
+    return os;
+}
+*/
