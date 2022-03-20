@@ -1,6 +1,7 @@
 #include "vector.h"
-#include <iosream>
+#include <iostream>
 #include <cmath>
+
 using namespace std;
 
 namespace VECTOR 
@@ -15,7 +16,7 @@ namespace VECTOR
     void Vector :: set_ang()
     {
         if (x == 0 || y == 0) {
-            ang = 0.0
+            ang = 0.0;
         } else  
             ang = atan2(y,x);
     }
@@ -26,7 +27,7 @@ namespace VECTOR
 
     void Vector :: set_y ()
     {
-        y = mag * sine(ang);
+        y = mag * sin(ang);
     }
 
     //public methoeds,
@@ -35,6 +36,7 @@ namespace VECTOR
         x = y = mag = ang = 0.0;
         mode = 'r';
     }
+ 
     Vector :: Vector (double n1, double n2, char form)
     {
         mode = form;
@@ -44,11 +46,13 @@ namespace VECTOR
             y = n2;
             set_mag();
             set_ang();
+
         } else if (form = 'p') {
            mag = n1;
            ang = n2 / Rad_to_deg; 
            set_x();
            set_y();
+
         } else {
             cout << "Incorrect 3rd argument to Vector()-- ";
             cout << "vector set to 0 \n";
@@ -57,7 +61,7 @@ namespace VECTOR
         }   
     }
 
-    void set :: Vector (double n1, double n2, char form) 
+    void Vector :: set (double n1, double n2, char form) 
     {
         mode = form;
         if (form == 'r')
@@ -111,24 +115,25 @@ namespace VECTOR
         return Vector(n * x, n * y);
     }
 
-    //friendly function 
+    //friend function 
     Vector operator* (double n, const Vector & a)
-    
+    { 
         return a * n;  //here's the trick.
     }
 
     //display rectaular coordinates if mode is r
     //else display polar coordinates if mode is p
-    void & operator<< (std::ostream & os, const Vector &v)
+    //<< shoudl have a connection funciton, so return std::ostream
+    std::ostream & operator<< (std::ostream & os, const Vector &v)
     {
         if (v.mode == 'r')
         {
-            os << "(x,y) = ("<< v.x <<","<< v.y <<")" ;
-        } else if (v.mode = 'p') {
-            os << "(m,a) = (" << v.mag << "," << v.ang * Rad_to_deg <<")";
+            os << "(x,y) = (" << v.x << "," << v.y <<")" ;
+        } else if (v.mode == 'p') {
+            os << "(m,a) = (" << v.mag << "," << v.ang * Rad_to_deg << ")";
         } else 
             os << "Vector object mode is invalid";
-        return 0;
+        return os;
     }
 
 } //end of space VECTOR

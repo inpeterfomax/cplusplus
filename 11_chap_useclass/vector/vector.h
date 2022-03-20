@@ -1,6 +1,6 @@
 #ifndef __VECTOR__H__ 
 #define __VECTOR__H__ 
-
+#include <iostream>
 namespace VECTOR 
 {
     class Vector 
@@ -30,9 +30,9 @@ namespace VECTOR
             Vector operator- (const Vector & b) const;
             Vector operator- () const;
             Vector operator* (double n) const;
-
+            
             friend Vector operator* (double n, const Vector & a);
-            friend void operator << (std::ostream & os, const Vector & v);
+            friend std::ostream & operator<< (std::ostream & os, const Vector & v);
 
     };
 }

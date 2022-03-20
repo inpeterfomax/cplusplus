@@ -23,7 +23,7 @@ int main ()
         if (!(cin >> dstep))
             break;
 
-        while (reslut.magval() < target)
+        while (result.magvalue() < target)
         {
             direction = rand() % 360;
             step.set (dstep,direction,'p');
@@ -33,7 +33,7 @@ int main ()
         cout << "After " << steps << " steps, the subject has the following locations : \n";
         cout << result << endl;
         result.polar_mode();
-        cout << " or " << result << endl;
+        cout << result << endl;
         cout << "Average outward distance per step = " << result.magvalue()/steps << endl;
         steps = 0;
         result.set(0.0,0.0);
