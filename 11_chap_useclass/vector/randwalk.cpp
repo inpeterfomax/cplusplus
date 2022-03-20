@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <ctime>
+#include <fstream>
 
 int main () 
 {
@@ -16,15 +17,31 @@ int main ()
     unsigned long steps = 0;
     double target;
     double dstep;
+
+    ofstream file;
+    file.open("history.txt");
+    
+    if (!file.is_open())
+    {
+        cout << "Open file failed" << endl;
+        exit(-1);
+    }
+
     cout << "Enter target distance (q to quit):";
+
     while (cin >> target)
     {
         cout << "Enter steps length: ";
         if (!(cin >> dstep))
             break;
 
+        //write the target distance and step length into file 
+        file << "Target distance" << target << "step lenght " << dstep << endl;
+
         while (result.magvalue() < target)
         {
+            file << steps <<": (x, y) = (" << result.xvalue() << ", " << result.yvalue() << ")\n";
+
             direction = rand() % 360;
             step.set (dstep,direction,'p');
             result = result + step;
@@ -38,6 +55,13 @@ int main ()
         steps = 0;
         result.set(0.0,0.0);
         cout << "Enter target distance (q to quit): ";
+
+
+        file << steps <<": (x,y) = (" << result.xvalue() << ", " << result.yvalue() << ")\n";
+		file << "After " << steps << " steps, the subject has the following location:\n";
+		file << "(x, y) = (" << result.xvalue() << ", " << result.yvalue() << ")" << "\nor\n";
+		file << "(m, a) = (" << result.magvalue() << ", " << result.angvalue() << ")\n";
+		file << "Average outward distance per step = " << result.magvalue() / steps << endl ;
     }
 
     cout << "Bye! \n";

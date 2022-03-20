@@ -11,8 +11,8 @@ namespace VECTOR
     void Vector :: set_mag()
     {
         mag = sqrt(x*x + y*y);
-
     }
+
     void Vector :: set_ang()
     {
         if (x == 0 || y == 0) {
@@ -20,6 +20,7 @@ namespace VECTOR
         } else  
             ang = atan2(y,x);
     }
+
     void Vector :: set_x ()
     {
         x = mag * cos (ang);
