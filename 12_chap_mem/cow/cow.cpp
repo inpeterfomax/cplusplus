@@ -69,6 +69,8 @@ Cow :: ~Cow ()
 
 Cow & Cow :: operator= (const Cow &c)
 {
+   if (this==&c)
+       return *this;
    strncpy(name,c.name,strlen(c.name));
    hobby = new char[128];
    strncpy (hobby,c.hobby,strlen(c.hobby));

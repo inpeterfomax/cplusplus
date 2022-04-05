@@ -1,0 +1,120 @@
+#include "dma.h"
+#include <cstring>
+
+using std::cout;
+using std::cin;
+using std::endl;
+
+baseDMA ::baseDMA (const char* l,int r)
+{
+    label = new char[std::strlen(l) + 1];
+    std::strncpy (label,l,std::strlen(l));
+    rating = r;
+}
+baseDMA ::baseDMA (const baseDMA &rs)
+{
+    label = new char[std::strlen (rs.label) + 1];
+    std::strcpy (label, rs.label);
+    rating = rs.rating;
+}
+
+baseDMA ::~baseDMA()
+{
+    delete [] label;
+}
+void baseDMA::View()
+{
+   cout << "label : "  << label << endl;
+}
+//this is the = 
+baseDMA &  baseDMA ::operator= (const baseDMA & rs)
+{
+    if (this == &rs)
+    {
+        cout << "is the same object." << endl;
+        return *this;
+    }
+    delete [] label;
+    label = new char[std::strlen (rs.label) + 1];
+    std::strcpy (label, rs.label);
+    rating = rs.rating;
+    return *this; 
+}
+std::ostream & operator<< (std::ostream & os, const baseDMA & rs)
+{
+    os << "Label: " << rs.label << std::endl;
+    os << "Rating: " << rs.rating << std::endl;
+    return os;
+}
+/* ==============================================================*/
+
+lacksDMA::lacksDMA (const char * c, const char * l, int r)
+{
+    std::strncpy (color,c,39);
+    color[39] = '\0';
+}
+
+lacksDMA::lacksDMA (const char* c, const baseDMA & rs) : baseDMA (rs)
+{
+    std::strncpy (color, c, COL_LEN -1);
+    color[COL_LEN - 1] = '\0';
+}
+
+std::ostream & operator<< (std::ostream & os, const lacksDMA & ls)
+{
+    os << (const baseDMA &)ls;
+    os << "Color: " << ls.color << std::endl;
+    return os;
+}
+void lacksDMA::View ()
+{
+    cout << "color : " << color << endl;
+}
+/* ==============================================================*/
+hasDMA :: hasDMA (const char * s , const char * l, int r) : baseDMA(l,r)
+{
+    style = new char[std::strlen(s) + 1];
+    std::strcpy (style, s);
+}
+
+hasDMA :: hasDMA (const char* s, const baseDMA & rs) : baseDMA(rs)
+{
+    style = new char [std::strlen(s) + 1];
+    std::strcpy (style,s);
+}
+
+hasDMA ::hasDMA (const hasDMA &hs) : baseDMA (hs) //this's critical.
+{
+    style = new char[std::strlen(hs.style) + 1];
+    std::strcpy (style,hs.style);
+}
+
+hasDMA ::~hasDMA()
+{
+    delete [] style;
+}
+
+hasDMA& hasDMA::operator= (const hasDMA& hs)
+{
+    if (this == &hs) 
+    {
+        cout << "this is the same target\n";
+        return *this;
+    }
+
+    baseDMA ::operator= (hs);
+    style = new char [std::strlen (hs.style) + 1];
+    std::strcpy (style, hs.style);
+    return *this;
+}
+std::ostream & operator<< (std::ostream & os, const hasDMA & hs)
+{
+    os << (const baseDMA & )hs;
+    os << "Style: " << hs.style << std::endl;
+    return os;
+}
+void hasDMA::View ()
+{
+    cout << "style : " << style << endl;
+
+}
