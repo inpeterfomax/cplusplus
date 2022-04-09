@@ -3,7 +3,7 @@
 
 using std::cin;
 using std::cout;
-using std::end;
+using std::endl;
 
 void set(Student& sa, int n);
 
